@@ -1,0 +1,232 @@
+import React, { useState } from 'react'
+import { Button, Modal, Form } from 'react-bootstrap'
+import { NumberFormatBase } from 'react-number-format';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useFunctions from './useFunctions';
+import usePVD from './usePVD';
+
+export default function Update_candidate(props) {
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    let item = location.state
+    function move() {
+        navigate('/Candidates_eligibility')
+    }
+
+    let {
+        // province
+        province,
+        Dropdow_province,
+        showlist,
+        listpro,
+        show_listpro,
+        nextpro,
+        backpro,
+        nextpage_pro,
+        Pagepro,
+
+        // district
+        district,
+        showlist_dis,
+        Dropdow_distric,
+        listdis,
+        show_listdis,
+        nextdis,
+        backdis,
+        Pagedis,
+        nextpage_dis,
+
+        // village
+        village,
+        showlist_vil,
+        listvil,
+        show_listvil,
+        Dropdow_village,
+        nextvil,
+        backvil,
+        nextpage_vil,
+        Pagevil,
+
+        Cancel_Dropdown,
+        list,
+    } = usePVD()
+
+    let {
+        Subupdate,
+        Number_phone,
+        Loadnumber,
+
+    } = useFunctions()
+
+
+    return (
+        <>
+            <div className="content-wrapper">
+                <div className="content-header">
+                    <div className="container-fluid">
+                        <div className='card'>
+                            <div className='card-header bg-success'><label className="btn-outline-white pt-2">ເພີມຂໍ້ມູນຜູ້ມີສິດສຸ່ມ</label></div>
+                            <div className='card-body'>
+                                <form method='POST' onSubmit={Subupdate}>
+                                    <div className='col-md-12'>
+                                        <div className='form-group'>
+                                            <label>ເບີໂທ</label>
+                                            <div className='input-group relative'>
+                                                <NumberFormatBase className='input-number856' maxLength={11} onChange={Number_phone} defaultValue={item.phone_number} placeholder=':.........' required />
+                                                {Loadnumber == 'true' ?
+                                                    <span className='input-group-text number-spane bg-light'>
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        <span> | ກະລຸນາປ້ອນເບີໂທໃຫ້ຄົບ</span>
+                                                    </span>
+                                                    : ''
+                                                }
+                                                {Loadnumber == 'false' ?
+                                                    <span className='input-group-text number-spane bg-light'>
+                                                        <span> ກະລຸນາປ້ອນເບີໂທ</span>
+                                                    </span>
+                                                    : ''
+                                                }
+                                                {Loadnumber == 'warning' ?
+                                                    <span className='input-group-text number-spane bg-warning'>
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        <span> | ກະລຸນາລໍຖ້າ</span>
+                                                    </span>
+                                                    : ''
+                                                }
+                                                {Loadnumber == 'info' ?
+                                                    <span className='input-group-text number-spane bg-success'>
+                                                        <span> | ເບີນີ້ຍັງບໍ່ມີໃນລະບົບ</span>
+                                                    </span>
+                                                    : ''
+                                                }
+                                                {Loadnumber == 'Success' ?
+                                                    <span className='input-group-text number-spane bg-info'>
+                                                        <span> | ເບີນີ້ມີໃນລະບົບແລ້ວ</span>
+                                                    </span>
+                                                    : ''
+                                                }
+
+                                                <span className='number856'>+856</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='col-md-12'>
+                                        <div className='row'>
+                                            <div className='col-md-6'>
+                                                <div className='form-group'>
+                                                    <label>ຊື່ ແລະ ນາມສະກຸນ</label>
+                                                    <div className='input-group'>
+                                                        <input type='text' className='form-control' defaultValue={item.full_name} placeholder=':.........' required />
+                                                        <input type='hidden' value={listpro === '' ? item.province?.id : listpro.id} />
+                                                        <input type='hidden' value={listdis === '' ? (listpro !== '' ? '' : item.district?.id) : listdis.id} />
+                                                        <input type='hidden' value={listvil === '' ? (listpro !== '' ? '' : item.village?.id) : listvil.id} />
+                                                        <input type='hidden' value={item.id} />
+                                                    </div>
+                                                </div>
+
+                                                <div className='form-group'>
+                                                    <label>ເມືອງ</label>
+                                                    <div className='input-group'>
+                                                        <div className={`form-control float-right drop-event-dis`}>
+                                                            <div className='w-100' onClick={showlist_dis}><a href='#' class="page-link" style={{ paddingTop: '3px' }}>{listdis === '' ? (listpro !== '' ? '~~ກະລຸນາເລືອກເມືອງ~~' : item.district?.district) : ('ເມືອງ: ' + listdis.district)}</a></div>
+                                                            <ul class={`list-group list-group-item-province`} hidden={show_listdis == false ? true : false}>
+                                                                {listpro === '' ? <a class="page-link" href="#" onClick={showlist}><li class="list-group-item list-hover">~~ ກະລຸນາເລືອກແຂວງກອນ ~~</li></a> :
+                                                                    district.map((item) => (
+                                                                        <a class="page-link" href="#"><li class="list-group-item list-hover" onClick={() => Dropdow_distric(item)}>ເມືອງ: {item.district}</li></a>
+                                                                    ))}
+                                                                <nav aria-label="..." className='px-2 pt-2 float-right list-group-item'>
+                                                                    <ul class="pagination">
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#" onClick={backdis}>Back</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#">{nextpage_dis} In {Pagedis}</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#" onClick={nextdis}>Next</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </nav>
+                                                            </ul>
+                                                        </div>
+                                                        <span className='border-fixed' onClick={Cancel_Dropdown} hidden={list == false ? true : false}></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div className='col-md-6'>
+                                                <div className='form-group'>
+                                                    <label>ແຂວງ</label>
+                                                    <div className='input-group'>
+                                                        <div className={`form-control float-right drop-event-dis`}>
+                                                            <div className='w-100' onClick={showlist}><a href='#' class="page-link" style={{ paddingTop: '3px' }}>{listpro === '' ? item.province?.province : ('ແຂວງ: ' + listpro.province)}</a></div>
+                                                            <ul class={`list-group list-group-item-province`} hidden={show_listpro == false ? true : false}>
+                                                                {province.map((item) => (
+                                                                    <a class="page-link" href="#"><li class="list-group-item list-hover" onClick={() => Dropdow_province(item)}>ແຂວງ: {item.province}</li></a>
+                                                                ))}
+                                                                <nav aria-label="..." className='px-2 pt-2 float-right list-group-item'>
+                                                                    <ul class="pagination">
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#" onClick={backpro}>Back</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#">{nextpage_pro} In {Pagepro}</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#" onClick={nextpro}>Next</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </nav>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className='form-group'>
+                                                    <label>ບ້ານ</label>
+                                                    <div className='input-group'>
+                                                        <div className={`form-control float-right drop-event-dis`}>
+                                                            <div className='w-100' onClick={showlist_vil}><a href='#' class="page-link" style={{ paddingTop: '3px' }}>{listvil === '' ? (listpro !== '' ? '~~ກະລຸນາເລືອກບ້ານ~~' : item.village?.village) : ('ບ້ານ: ' + listvil.village)}</a></div>
+                                                            <ul class={`list-group list-group-item-province`} hidden={show_listvil == false ? true : false}>
+                                                                {village.map((item) => (
+                                                                    <a class="page-link" href="#"><li class="list-group-item list-hover" onClick={() => Dropdow_village(item)}>ບ້ານ: {item.village}</li></a>
+                                                                ))}
+                                                                {listdis === '' ? <a class="page-link" href="#" onClick={showlist}><li class="list-group-item list-hover">~~ ກະລຸນາເລືອກເມືອງກອນ ~~</li></a> : ''}
+                                                                {listdis === '' ? '' : (village.length > 0 ? '' : <a class="page-link" href="#"><li class="list-group-item list-hover">~~ ບໍ່ມີຂໍ້ມູນບ້ານໃນ ເມືອງ: {listdis.district.district} ~~</li></a>)}
+                                                                <nav aria-label="..." className='px-2 pt-2 float-right list-group-item'>
+                                                                    <ul class="pagination">
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#" onClick={backvil}>Back</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#">{nextpage_vil} In {Pagevil}</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" href="#" onClick={nextvil}>Next</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </nav>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='card-footer'>
+                                        <button type='submit' className='btn btn-sm btn-outline-success mr-2'><i class="bi bi-cloud-download"></i> | ແກ້ໄຂຂໍ້ມູນ</button>
+                                        <button type='button' className='btn btn-sm btn-outline-danger' onClick={move}><i class="bi bi-arrow-bar-left"></i> | ຍົກເລີກ</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </>
+    )
+}

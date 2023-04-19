@@ -1,0 +1,8 @@
+.sidebar-overflow {
+    height: 100vh;
+    overflow-x: auto;
+}
+
+/* .sidebar-overflow::-webkit-scrollbar {
+    display: none;
+} */

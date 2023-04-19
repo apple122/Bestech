@@ -1,0 +1,10 @@
+.list-items-label {
+    background-color: red;
+    gap: 0;
+    width: 20%;
+}
+.paginations {
+    border-radius: 6px;
+    border: 1px solid whitesmoke;
+    padding: 2%;
+}
