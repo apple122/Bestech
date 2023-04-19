@@ -1,0 +1,113 @@
+.Link-facebook, .Link-instagram, .Link-whatsapp, .Link-email {
+    font-size: 34px;
+    font-weight: bold;
+    padding: 0% 0.5%;
+    color: black;
+    z-index: 2;
+}
+
+.grap-colums-footer {
+    padding: 2% 6%;
+}
+
+.text-weight {
+font-weight: bold;
+}
+
+@media screen and (max-width: 767px) {
+    .activef:hover {
+        transition: all 0.5s;
+        border-bottom: 1px solid black;
+        width: 100%;
+        padding-left: 2%;
+    }
+    .activef {
+        transition: all 0.5s;
+        width: 100%;
+    }
+    .colums-repone {
+        padding: 5% 0%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.137);
+    }
+    .display-repone {
+        display: block;
+    }
+}
+@media screen and (min-width: 767px) {
+    .activef:hover {
+        transition: all 0.5s;
+        border-bottom: 1px solid black;
+        width: 100%;
+        padding-left: 2%;
+    }
+    .activef {
+        justify-content: center;
+        transition: all 0.5s;
+        width: 100%;
+    }
+    .display-repone {
+        display: flex;
+        justify-content: center;
+    }
+    
+}
+.colums-repone {
+    overflow: hidden;
+    width: 100%;
+}
+.repone-hover-footer:hover > :not(:hover){
+    opacity: .5;
+}
+.animetion-footer {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    height: 48px;
+}
+.animetion-footer:hover .animetionLink {
+    font-size: 25px;
+    padding-top: 1.5%;
+    transform: scale(1 , 1);
+    width: 100%;
+    transition: all 0.5s;
+    color: rgb(20, 20, 82);
+}
+.animetion-footer:hover .animetionwhatsapp {
+    font-size: 34px;
+    width: 100%;
+    transition: all 0.5s;
+    color: green;
+}
+.animetion-footer:hover .animetionText {
+    width: 0%;
+    transition: all 0.8s;
+}
+
+.animetionText {
+    /* position: absolute; */
+    left: 0;
+    width: 100%;
+    font-size: 34px;
+    transition: all 0.8s;
+    z-index: 1;
+    background-color: white;
+    font-weight: bold;
+    color: black;
+}
+.animetionLink {
+    font-size: 34px;
+    width: 0%;
+    transition: all 0.8s;
+    color: rgb(14, 14, 139);
+}
+.animetionwhatsapp {
+    font-size: 34px;
+    width: 0%;
+    transition: all 0.8s;
+}
+
+.space-icone {
+    font-size: 34px;
+    font-weight: bold;
+    padding: 0% 1.2%;
+}

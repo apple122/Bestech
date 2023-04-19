@@ -1,0 +1,18 @@
+.page-padding-active {
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 100px;
+}
+
+.span-page-acitve {
+    padding-left: 100%;
+}
+
+.container-padding {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.font-page { 
+    font-size: 1.5vh;
+}
